@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import scipy
+# import scipy
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta, date
@@ -34,19 +34,19 @@ optionsFileData = optionsFile.readlines()
 optionsFile.close()
 
 # Get SPX Spot
-spotLine = optionsFileData[1]
+spotLine = optionsFileData[0]
 spotPrice = float(spotLine.split('Last:')[1].split(',')[0])
 fromStrike = 0.8 * spotPrice
 toStrike = 1.2 * spotPrice
 
 # Get Today's Date
-dateLine = optionsFileData[2]
+dateLine = optionsFileData[1]
 todayDate = dateLine.split('Date: ')[1].split(',')
 monthDay = todayDate[0].split(' ')
 
 # Handling of US/EU date formats
 if len(monthDay) == 2:
-    year = int(todayDate[1])
+    year = int(todayDate[1].split(' ')[1])
     month = monthDay[0]
     day = int(monthDay[1])
 else:
